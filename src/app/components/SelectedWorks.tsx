@@ -2,7 +2,7 @@
 import Link from "next/link";
 import worksData from "../data/worksData";
 import { Work } from "../types/work";
-import Image from "next/image";  // Import Next.js Image component
+import Image from "next/image"; // Import Next.js Image component
 
 const SelectedWorks: React.FC = () => {
   return (
@@ -11,21 +11,27 @@ const SelectedWorks: React.FC = () => {
         <h2 className="text-4xl font-bold text-center mb-8">Selected Works</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
           {worksData.map((work: Work) => (
-            <Link key={work.id} href={`/works/${work.id}`} aria-label={`View details for ${work.title}`}>
+            <Link
+              key={work.id}
+              href={`/works/${work.id}`}
+              aria-label={`View details for ${work.title}`}
+            >
               <div className="group cursor-pointer transition-all">
-                <div className="relative w-full h-60 overflow-hidden rounded-lg">
+                <div className="relative w-full h-60 bg-gray-900 rounded-lg overflow-hidden">
                   <Image
                     src={work.imageUrl}
                     alt={work.title}
-                    width={400}   // Specify width for optimization
-                    height={240}  // Specify height for optimization
-                    className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform"
-                    loading="lazy"  // Enable lazy loading
-                    quality={75}    // Set the quality for compression
-                    sizes="(max-width: 768px) 100vw, 33vw"  // Responsive sizes
+                    fill
+                    style={{ objectFit: "cover" }}
+                    className="transform group-hover:scale-105 transition-transform"
+                    loading="lazy" // Enable lazy loading
+                    quality={75} // Set the quality for compression
+                    sizes="(max-width: 768px) 100vw, 33vw" // Responsive sizes
                   />
                 </div>
-                <p className="mt-2 text-sm font-semibold">{work.id}. {work.title}</p>
+                <p className="mt-2 text-sm font-semibold">
+                  {work.id}. {work.title}
+                </p>
               </div>
             </Link>
           ))}

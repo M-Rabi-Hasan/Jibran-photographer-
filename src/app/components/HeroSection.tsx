@@ -3,16 +3,23 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
+import styled from "styled-components";
 import Marquee from "react-marquee-slider"; // Importing the library
 
 // Sample image data array
 const images = [
-  { src: "/images/4.jpeg", alt: "Wildlife 1" },
-  { src: "/images/5.jpeg", alt: "Wildlife 2" },
-  { src: "/images/6.jpeg", alt: "Wildlife 3" },
-  { src: "/images/7.jpeg", alt: "Wildlife 4" },
+  { src: "/jibran/jibran-5.JPG", alt: "Wildlife 1" },
+  { src: "/family-shoot/F-6.jpg", alt: "Wildlife 1" },
+  { src: "/jibran/jibran-9.JPG", alt: "Wildlife 1" },
+  { src: "/business-shot/B-4.jpg", alt: "Wildlife 2" },
+  { src: "/party-event/P-1.jpg", alt: "Wildlife 3" },
+  { src: "/jibran/jibran-13.JPG", alt: "Wildlife 4" },
   { src: "/images/8.jpeg", alt: "Wildlife 5" },
 ];
+
+const StyledMarquee = styled(Marquee)`
+  /* Add any custom styling here if needed */
+`;
 
 export function HeroSection() {
   const [isMobile, setIsMobile] = useState(false);
@@ -37,28 +44,35 @@ export function HeroSection() {
       {/* Header */}
       <header className="flex justify-between items-center px-6 w-full">
         <div className="flex items-center">
-          <Image
-            src="/Logo-3.png"
-            width={1000}
-            height={1000}
-            alt="PHOTOFOX Logo"
-            className="h-44 w-auto"
-          />
+          <div className="relative w-44 h-44">
+            <Image
+              src="/Logo-3.png"
+              alt="PHOTOFOX Logo"
+              fill
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
         <nav
-          className={`absolute top-16 right-0 bg-black text-white md:flex md:static md:bg-transparent space-y-2 md:space-y-0 md:space-x-4 text-lg ${
+          className={`absolute top-28 rounded-md right-0 bg-black text-white md:flex md:static md:bg-transparent space-y-2 md:space-y-0 md:space-x-4 text-lg ${
             menuOpen ? "block" : "hidden"
           } md:block`}
         >
-          {["Home", "Gallery", "Blog", "About", "Contact"].map((link) => (
+          {[
+            "Home",
+            "Gallery",
+            "Blog",
+            "About",
+            "Contact",
+          ].map((link) => (
             <a
               key={link}
               href={
                 link === "Home"
                   ? "/"
                   : link === "Blog"
-                    ? "https://jabraan-blog.vercel.app/" // External link for the Blog
-                    : `/${link.toLowerCase()}`
+                  ? "https://jabraan-blog.vercel.app/" // External link for the Blog
+                  : `/${link.toLowerCase()}`
               }
               target={link === "Blog" ? "_blank" : "_self"} // Open Blog link in a new tab
               rel={link === "Blog" ? "noopener noreferrer" : undefined} // Security best practices for external links
@@ -94,14 +108,17 @@ export function HeroSection() {
       {isMobile ? (
         <div className="relative w-full overflow-x-auto whitespace-nowrap space-x-4 px-8">
           {images.map((image, index) => (
-            <Image
+            <div
               key={index}
-              src={image.src}
-              alt={image.alt}
-              width={300}
-              height={200}
-              className="inline-block rounded shadow-lg"
-            />
+              className="relative w-[300px] h-[200px] inline-block rounded shadow-lg"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           ))}
         </div>
       ) : (
@@ -109,27 +126,28 @@ export function HeroSection() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <Marquee
-            velocity={isPaused ? 0 : 20}
+          <StyledMarquee
+            velocity={isPaused ? 0 : 40}
             direction="rtl"
             scatterRandomly={false}
             onInit={() => console.log("Marquee initialized")}
             onFinish={() => console.log("Marquee finished")}
             resetAfterTries={50}
-            {...(isPaused ? { paused: "true" } : {})}
           >
             {images.map((image, index) => (
-              <div key={index} className="mx-4">
+              <div
+                key={index}
+                className="relative w-[400px] h-[200px] mx-4 rounded shadow-lg"
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
-                  width={400}
-                  height={200}
-                  className="rounded shadow-lg"
+                  fill
+                  style={{ objectFit: "cover" }}
                 />
               </div>
             ))}
-          </Marquee>
+          </StyledMarquee>
         </div>
       )}
     </section>

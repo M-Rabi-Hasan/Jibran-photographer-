@@ -17,9 +17,9 @@ export default function ExperienceSection() {
           <h2 className="text-4xl md:text-5xl font-extrabold">
             EXPERIENCE OF 10 YEARS IN THE FIELD
           </h2>
-          <div className="relative w-full h-64 md:h-96">
+          <div className="relative w-full h-64 md:h-96 bg-gray-900 rounded-lg overflow-hidden">
             <Image
-              src="/pic-7.png"
+              src="/jibran/jibran-3.JPG"
               alt="Climber"
               fill
               style={{ objectFit: "cover" }}
@@ -43,9 +43,9 @@ export default function ExperienceSection() {
               </li>
             ))}
           </ul>
-          <div className="relative w-full h-64 md:h-72">
+          <div className="relative w-full h-64 md:h-72 bg-gray-900 rounded-lg overflow-hidden">
             <Image
-              src="/pic-8.png"
+              src="/jibran/jibran-13.JPG"
               alt="Food Photography"
               fill
               style={{ objectFit: "cover" }}
